@@ -1,0 +1,5 @@
+# FastAPI
+fastapi ~= 0.89.1
+
+# For templating
+jinja2 ~= 3.1.2
