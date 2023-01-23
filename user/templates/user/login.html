@@ -1,0 +1,23 @@
+<div class="container">
+    <form action="/user/login/" method="POST"> {% csrf_token %}
+        <div class="field">
+            <label class="label">E-Mail</label>
+            <div class="control has-icons-left">
+                <input name="email" class="input" type="text" placeholder="E-Mail Adresse" value="">
+                <span class="icon is-small is-left">
+                    <i class="fa fa-at"></i>
+                </span>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Passwort</label>
+            <div class="control has-icons-left">
+                <input name="password" class="input" type="text" placeholder="Passwort" value="">
+                <span class="icon is-small is-left">
+                    <i class="fa fa-key"></i>
+                </span>
+            </div>
+        </div>
+        <input type="submit" class="button is-primary">
+    </form>
+</div>

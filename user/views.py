@@ -12,3 +12,19 @@ def signup(request: HttpRequest):
     empty_template = loader.get_template("empty_site.html")
     template = loader.get_template("user/signup.html")
     return HttpResponse(empty_template.render({"site": template.render({}, request)}, request))
+
+def login(request: HttpRequest):
+    if request.method == "POST":
+        print(request.POST)
+    empty_template = loader.get_template("empty_site.html")
+    template = loader.get_template("user/login.html")
+    return HttpResponse(empty_template.render({"site": template.render({}, request)}, request))
+
+
+#Jette: Proforma schon mal nen Logout gemacht
+def logout(request: HttpRequest):
+    if request.method == "POST":
+        print(request.POST)
+    empty_template = loader.get_template("empty_site.html")
+    template = loader.get_template("user/logout.html")
+    return HttpResponse(empty_template.render({"site": template.render({}, request)}, request))
