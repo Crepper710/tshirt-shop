@@ -1,0 +1,14 @@
+<div class="container">
+    <form action="/user/logout/" method="POST"> {% csrf_token %}
+        <div class="field">
+            <label class="label">Logout</label>
+            <div class="control has-icons-left">
+                <input name="email" class="input" type="button" placeholder="Logout" value="Logout">
+                <span class="icon is-small is-left">
+                    <i class="fa fa-at"></i>
+                </span>
+            </div>
+        <input type="submit" class="button is-primary">
+    </form>
+</div>
+<!-- Jette: Logout User -->
