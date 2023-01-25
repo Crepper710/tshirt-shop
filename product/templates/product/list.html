@@ -1,0 +1,87 @@
+<div class="container">
+    <form>
+        <div class="columns">
+            <div class="field column is-one-third">
+                <label class="label">Search</label>
+                <div class="control has-icons-left">
+                    <input name="q" class="input" type="text" placeholder="Search" value="{{ search }}">
+                    <span class="icon is-small is-left">
+                        <i class="fa fa-search"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="field column is-one-third">
+                <label class="label">Sort by</label>
+                <div class="select">
+                    <select name="s">
+                        <option value="pa" {% if sort == "pa" %}selected{% endif %}>Price ascending</option>
+                        <option value="pd" {% if sort == "pd" %}selected{% endif %}>Price descending</option>
+                    </select>
+                </div>
+            </div>
+            <div class="field column is-one-third">
+                <input type="submit" value="Search" class="button is-primary">
+            </div>
+        </div>
+    </form>
+    <article class="media">
+        <figure class="media-left">
+            <p class="image is-128x128">
+                <img src="https://res.cloudinary.com/teepublic/image/private/s--d8TxZU2F--/t_Resized Artwork/c_crop,x_10,y_10/c_fit,w_470/c_crop,g_north_west,h_626,w_470,x_0,y_0/g_north_west,u_upload:v1462829013:production:blanks:cau9y2yr6rnvk9qkrf1h,x_-395,y_-325/b_rgb:eeeeee/c_limit,f_auto,h_630,q_90,w_630/v1607330773/production/designs/17003255_0.jpg" alt="Todo">
+            </p>
+        </figure>
+        <div class="media-content">
+            <table class="table is-narrow">
+                <thead>
+                <tr>
+                    <th colspan="2">T-Shirt</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Price</td>
+                    <td>1.99</td>
+                </tr>
+                <tr>
+                    <td>Colors</td>
+                    <td>1.99</td>
+                </tr>
+                <tr>
+                    <td>...</td>
+                    <td>...</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </article>
+    <article class="media">
+        <figure class="media-left">
+            <p class="image is-128x128">
+                <img src="https://res.cloudinary.com/teepublic/image/private/s--d8TxZU2F--/t_Resized Artwork/c_crop,x_10,y_10/c_fit,w_470/c_crop,g_north_west,h_626,w_470,x_0,y_0/g_north_west,u_upload:v1462829013:production:blanks:cau9y2yr6rnvk9qkrf1h,x_-395,y_-325/b_rgb:eeeeee/c_limit,f_auto,h_630,q_90,w_630/v1607330773/production/designs/17003255_0.jpg" alt="Todo">
+            </p>
+        </figure>
+        <div class="media-content">
+            <table class="table is-narrow">
+                <thead>
+                <tr>
+                    <th colspan="2">T-Shirt</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Price</td>
+                    <td>1.99</td>
+                </tr>
+                <tr>
+                    <td>Colors</td>
+                    <td>1.99</td>
+                </tr>
+                <tr>
+                    <td>...</td>
+                    <td>...</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </article>
+</div>
