@@ -4,84 +4,75 @@
             <div class="field column is-one-third">
                 <label class="label">Search</label>
                 <div class="control has-icons-left">
-                    <input name="q" class="input" type="text" placeholder="Search" value="{{ search }}">
+                    <input name="q" class="input" type="text" placeholder="Suche" value="{{ search }}">
                     <span class="icon is-small is-left">
                         <i class="fa fa-search"></i>
                     </span>
                 </div>
             </div>
             <div class="field column is-one-third">
-                <label class="label">Sort by</label>
+                <label class="label">Sortiere nach</label>
                 <div class="select">
                     <select name="s">
-                        <option value="pa" {% if sort == "pa" %}selected{% endif %}>Price ascending</option>
-                        <option value="pd" {% if sort == "pd" %}selected{% endif %}>Price descending</option>
+                        <option value="pa" {% if sort == "pa" %}selected{% endif %}>Preis aufsteigend</option>
+                        <option value="pd" {% if sort == "pd" %}selected{% endif %}>Preis absteigend</option>
                     </select>
                 </div>
             </div>
+            <input type="number" name="p" value=1 hidden>
             <div class="field column is-one-third">
-                <input type="submit" value="Search" class="button is-primary">
+                <input type="submit" value="Suche" class="button is-primary">
             </div>
         </div>
     </form>
-    <article class="media">
-        <figure class="media-left">
-            <p class="image is-128x128">
-                <img src="https://res.cloudinary.com/teepublic/image/private/s--d8TxZU2F--/t_Resized Artwork/c_crop,x_10,y_10/c_fit,w_470/c_crop,g_north_west,h_626,w_470,x_0,y_0/g_north_west,u_upload:v1462829013:production:blanks:cau9y2yr6rnvk9qkrf1h,x_-395,y_-325/b_rgb:eeeeee/c_limit,f_auto,h_630,q_90,w_630/v1607330773/production/designs/17003255_0.jpg" alt="Todo">
-            </p>
-        </figure>
-        <div class="media-content">
-            <table class="table is-narrow">
-                <thead>
-                <tr>
-                    <th colspan="2">T-Shirt</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>Price</td>
-                    <td>1.99</td>
-                </tr>
-                <tr>
-                    <td>Colors</td>
-                    <td>1.99</td>
-                </tr>
-                <tr>
-                    <td>...</td>
-                    <td>...</td>
-                </tr>
-                </tbody>
-            </table>
+    {% for article in articles %}
+    <a href="/product/info/?id={{ article.0 }}">
+        <article class="media">
+            <figure class="media-left">
+                <p class="image is-128x128">
+                    <img src="TODO" alt="TODO">
+                </p>
+            </figure>
+            <div class="media-content">
+                <table class="table is-narrow">
+                    <thead>
+                    <tr>
+                        <th colspan="2">{{ article.1 }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td colspan="2">{{ article.2 }}</td>
+                    </tr>
+                    <tr>
+                        <td>Preis</td>
+                        <td>{{ article.3 }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </article>
+    </a>
+    {% endfor %}
+    <div class="columns">
+        <div class="column is-one-third">
+            {% if has_prev %}
+            <div class="buttons">
+                <a href="/product/list/?q={{ search }}&s={{ sort }}&p={{ prev_page }}" class="button is-primary is-full">
+                    &lt;
+                </a>
+            </div>
+            {% endif %}
         </div>
-    </article>
-    <article class="media">
-        <figure class="media-left">
-            <p class="image is-128x128">
-                <img src="https://res.cloudinary.com/teepublic/image/private/s--d8TxZU2F--/t_Resized Artwork/c_crop,x_10,y_10/c_fit,w_470/c_crop,g_north_west,h_626,w_470,x_0,y_0/g_north_west,u_upload:v1462829013:production:blanks:cau9y2yr6rnvk9qkrf1h,x_-395,y_-325/b_rgb:eeeeee/c_limit,f_auto,h_630,q_90,w_630/v1607330773/production/designs/17003255_0.jpg" alt="Todo">
-            </p>
-        </figure>
-        <div class="media-content">
-            <table class="table is-narrow">
-                <thead>
-                <tr>
-                    <th colspan="2">T-Shirt</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>Price</td>
-                    <td>1.99</td>
-                </tr>
-                <tr>
-                    <td>Colors</td>
-                    <td>1.99</td>
-                </tr>
-                <tr>
-                    <td>...</td>
-                    <td>...</td>
-                </tr>
-                </tbody>
-            </table>
+        <div class="column is-one-third"></div>
+        <div class="column is-one-third">
+            {% if has_next %}
+            <div class="buttons is-right">
+                <a href="/product/list/?q={{ search }}&s={{ sort }}&p={{ next_page }}" class="button is-primary is-full">
+                    &gt;
+                </a>
+            </div>
+            {% endif %}
         </div>
-    </article>
+    </div>
 </div>
