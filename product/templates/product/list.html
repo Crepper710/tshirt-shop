@@ -26,52 +26,54 @@
         </div>
     </form>
     {% for article in articles %}
-    <a href="/product/info/?id={{ article.0 }}">
-        <article class="media">
-            <figure class="media-left">
-                <p class="image is-128x128">
-                    <img src="TODO" alt="TODO">
-                </p>
-            </figure>
-            <div class="media-content">
-                <table class="table is-narrow">
-                    <thead>
-                    <tr>
-                        <th colspan="2">{{ article.1 }}</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td colspan="2">{{ article.2 }}</td>
-                    </tr>
-                    <tr>
-                        <td>Preis</td>
-                        <td>{{ article.3 }}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </article>
-    </a>
+        <a href="/product/info/?id={{ article.0 }}">
+            <article class="media">
+                <figure class="media-left">
+                    <p class="image is-128x128">
+                        <img src="TODO" alt="TODO">
+                    </p>
+                </figure>
+                <div class="media-content">
+                    <table class="table is-narrow is-fullwidth">
+                        <thead>
+                        <tr>
+                            <th colspan="2">{{ article.1 }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td colspan="2">{{ article.2 }}</td>
+                        </tr>
+                        <tr>
+                            <td>Preis</td>
+                            <td style="width: 100%">{{ article.3 }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </article>
+        </a>
     {% endfor %}
     <div class="columns">
         <div class="column is-one-third">
             {% if has_prev %}
-            <div class="buttons">
-                <a href="/product/list/?q={{ search }}&s={{ sort }}&p={{ prev_page }}" class="button is-primary is-full">
-                    &lt;
-                </a>
-            </div>
+                <div class="buttons">
+                    <a href="/product/list/?q={{ search }}&s={{ sort }}&p={{ prev_page }}"
+                       class="button is-primary is-full">
+                        &lt;
+                    </a>
+                </div>
             {% endif %}
         </div>
         <div class="column is-one-third"></div>
         <div class="column is-one-third">
             {% if has_next %}
-            <div class="buttons is-right">
-                <a href="/product/list/?q={{ search }}&s={{ sort }}&p={{ next_page }}" class="button is-primary is-full">
-                    &gt;
-                </a>
-            </div>
+                <div class="buttons is-right">
+                    <a href="/product/list/?q={{ search }}&s={{ sort }}&p={{ next_page }}"
+                       class="button is-primary is-full">
+                        &gt;
+                    </a>
+                </div>
             {% endif %}
         </div>
     </div>

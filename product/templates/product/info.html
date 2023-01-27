@@ -1,93 +1,113 @@
 <div class="container">
-    <img style="height: 500px;" id="product-image" src="/static/product/{{ info.0.1 }}/{{ motivs.0.1 }}/{{ colors.0.1 }}.png" alt="Kein Bild vorhanden">
-    <form action="/product/shopping_card/" method="POST">
+    <img style="height: 500px;" id="product-image"
+         src="/static/product/{{ info.0.1 }}/{{ motivs.0.1 }}/{{ colors.0.1 }}.png" alt="Kein Bild vorhanden">
+    <form action="/product/shopping_cart/" method="POST">
         <table class="table">
             <tbody>
-            {% if colors|length != 0 %}
             <tr>
-                <td>Farbe:</td>
-                <td>
-                    <div class="field">
-                        {% for color in colors %}
-                        <span class="tag is-light">
-                            <label class="radio">
-                                <input type="radio" name="color" value="{{ color.0 }}" onchange="update_color(this.attributes.color_name.value);" color_name="{{ color.1 }}" required>
-                                <div style="background-color: {{ color.2 }}; width: 10px; height: 10px; display: inline-block; border-radius: 5px;"></div>
-                                {{ color.1 }}
-                            </label>
-                        </span>
-                        {% endfor %}
-                    </div>
+                <td colspan="2">
+                    {{ info.0.2 }}
                 </td>
             </tr>
+            {% if colors|length != 0 %}
+                <tr>
+                    <td>Farbe:</td>
+                    <td>
+                        <div class="field">
+                            {% for color in colors %}
+                                <span class="tag is-light">
+                                    <label class="radio">
+                                        <input type="radio" name="color" value="{{ color.0 }}"
+                                               onchange="update_color(this.attributes.color_name.value);"
+                                               color_name="{{ color.1 }}" required>
+                                        <div style="background-color: {{ color.2 }}; width: 10px; height: 10px; display: inline-block; border-radius: 5px;"></div>
+                                        {{ color.1 }}
+                                    </label>
+                                </span>
+                            {% endfor %}
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <input type="text" name="color" value="-1" hidden>
             {% endif %}
             {% if sizes|length != 0 %}
-            <tr>
-                <td>Größe:</td>
-                <td>
-                    <div class="field">
-                        {% for size in sizes %}
-                        <span class="tag is-light">
-                            <label class="radio">
-                                <input type="radio" name="size" value="{{ size.0 }}" required>
-                                {{ size.1 }}
-                            </label>
-                        </span>
-                        {% endfor %}
-                    </div>
-                </td>
-            </tr>
+                <tr>
+                    <td>Größe:</td>
+                    <td>
+                        <div class="field">
+                            {% for size in sizes %}
+                                <span class="tag is-light">
+                                    <label class="radio">
+                                        <input type="radio" name="size" value="{{ size.0 }}" required>
+                                        {{ size.1 }}
+                                    </label>
+                                </span>
+                            {% endfor %}
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <input type="text" name="size" value="-1" hidden>
             {% endif %}
             {% if materials|length != 0 %}
-            <tr>
-                <td>Material:</td>
-                <td>
-                    <div class="field">
-                        {% for material in materials %}
-                        <span class="tag is-light">
-                            <label class="radio">
-                                <input type="radio" name="material" value="{{ material.0 }}" required>
-                                {{ material.1 }}
-                            </label>
-                        </span>
-                        {% endfor %}
-                    </div>
-                </td>
-            </tr>
+                <tr>
+                    <td>Material:</td>
+                    <td>
+                        <div class="field">
+                            {% for material in materials %}
+                                <span class="tag is-light">
+                                    <label class="radio">
+                                        <input type="radio" name="material" value="{{ material.0 }}" required>
+                                        {{ material.1 }}
+                                    </label>
+                                </span>
+                            {% endfor %}
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <input type="text" name="material" value="-1" hidden>
             {% endif %}
             {% if motivs|length != 0 %}
-            <tr>
-                <td>Motiv:</td>
-                <td>
-                    <div class="field">
-                        {% for motiv in motivs %}
-                        <span class="tag is-light">
-                            <label class="radio">
-                                <input type="radio" name="motiv" value="{{ motiv.0 }}" onchange="update_motiv(this.attributes.motiv_name.value);" motiv_name="{{ motiv.1 }}" required>
-                                {{ motiv.1 }}
-                            </label>
-                        </span>
-                        {% endfor %}
-                    </div>
-                </td>
-            </tr>
+                <tr>
+                    <td>Motiv:</td>
+                    <td>
+                        <div class="field">
+                            {% for motiv in motivs %}
+                                <span class="tag is-light">
+                                    <label class="radio">
+                                        <input type="radio" name="motiv" value="{{ motiv.0 }}"
+                                               onchange="update_motiv(this.attributes.motiv_name.value);"
+                                               motiv_name="{{ motiv.1 }}" required>
+                                        {{ motiv.1 }}
+                                    </label>
+                                </span>
+                            {% endfor %}
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <input type="text" name="motiv" value="-1" hidden>
             {% endif %}
             {% if fits|length != 0 %}
-            <tr>
-                <td>Fit:</td>
-                <td>
-                    <div class="field">
-                        {% for fit in fits %}
-                        <span class="tag is-light">
-                            <label class="radio">
-                                <input type="radio" name="fit" value="{{ fit.0 }}" required>
-                                {{ fit.1 }}
-                            </label>
-                        </span>
-                        {% endfor %}
-                    </div>
-                </td>
-            </tr>
+                <tr>
+                    <td>Fit:</td>
+                    <td>
+                        <div class="field">
+                            {% for fit in fits %}
+                                <span class="tag is-light">
+                                    <label class="radio">
+                                        <input type="radio" name="fit" value="{{ fit.0 }}" required>
+                                        {{ fit.1 }}
+                                    </label>
+                                </span>
+                            {% endfor %}
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <input type="text" name="fit" value="-1" hidden>
             {% endif %}
             <tr>
                 <td>Anzahl:</td>
@@ -95,9 +115,9 @@
                     <div class="field">
                         <div class="select">
                             <select name="amount" required>
-                                <option value="1" selected="true">1</option>
+                                <option value="1" selected>1</option>
                                 {% with ''|center:19 as range %}
-                                {% for _ in range %}
+                                    {% for _ in range %}
                                 <option value="{{ forloop.counter|add:"1" }}">{{ forloop.counter|add:"1" }}</option>
                                 {% endfor %}
                                 {% endwith %}
@@ -123,8 +143,8 @@
 
 <script type="text/javascript">
     const type_ = "{{ info.0.1 }}";
-    var color = "{{ colors.0.1 }}";
-    var motiv = "{{ motivs.0.1 }}";
+    let color = "{{ colors.0.1 }}";
+    let motiv = "{{ motivs.0.1 }}";
 
     function update_color(color_new) {
         color = color_new;
@@ -137,7 +157,7 @@
     }
 
     function update_image() {
-        var pic = document.getElementById("product-image");
+        const pic = document.getElementById("product-image");
         pic.src = "/static/product/" + type_ + "/" + motiv + "/" + color + ".png";
     }
 </script>

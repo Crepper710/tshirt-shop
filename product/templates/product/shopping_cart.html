@@ -1,0 +1,79 @@
+<div class="container">
+    <h1 class="title is-1 has-text-centered">Einkaufswagen</h1>
+    {% for item in cart %}
+        <article class="media">
+            <figure class="media-left">
+                <p class="image is-128x128">
+                    <img src="TODO" alt="TODO">
+                </p>
+            </figure>
+            <div class="media-content">
+                <table class="table is-narrow is-fullwidth">
+                    <thead>
+                    <tr>
+                        <th colspan="2">{{ item.info.1 }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td colspan="2">{{ item.info.2 }}</td>
+                    </tr>
+                    <tr>
+                        <td style="white-space: nowrap;">Preis (pro Einheit)</td>
+                        <td style="width: 100%">{{ item.info.3 }}</td>
+                    </tr>
+                    <tr>
+                        <td>Menge</td>
+                        <td style="width: 100%">{{ item.amount }}</td>
+                    </tr>
+                    <tr>
+                        <td>Info</td>
+                        <td style="width: 100%">
+                            {% if item.color %}
+                                <span class="tag is-light">
+                                    Farbe:
+                                    &nbsp;
+                                    <div style="background-color: {{ item.color.1 }}; width: 10px; height: 10px; display: inline-block; border-radius: 5px;"></div>
+                                    &nbsp;
+                                    {{ item.color.0 }}
+                                </span>
+                            {% endif %}
+                            {% if item.size %}
+                                <span class="tag is-light">
+                                    Größe: {{ item.size }}
+                                </span>
+                            {% endif %}
+                            {% if item.material %}
+                                <span class="tag is-light">
+                                    Material: {{ item.material }}
+                                </span>
+                            {% endif %}
+                            {% if item.motiv %}
+                                <span class="tag is-light">
+                                    Motiv: {{ item.motiv }}
+                                </span>
+                            {% endif %}
+                            {% if item.fit %}
+                                <span class="tag is-light">
+                                    Fit: {{ item.fit }}
+                                </span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="media-right">
+                <form action="/product/shopping_cart/" method="POST">
+                    {% csrf_token %}
+                    <input type="text" name="uuid" value="{{ item.uuid }}" hidden>
+                    <input type="text" name="action" value="rem" hidden>
+                    <label for="submit">
+                        <button class="delete"></button>
+                    </label>
+                    <input type="submit" name="submit" class="delete" style="display: none"> <!-- hidden does not work :( -->
+                </form>
+            </div>
+        </article>
+    {% endfor %}
+</div>
