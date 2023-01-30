@@ -7,7 +7,7 @@ import config
 _ALGORITHM = 'HS256'
 
 
-def gen_token(user_id: int, active_for: timedelta) -> str:
+def gen_token(user_id: int, active_for: timedelta = timedelta(days = 7)) -> str:
     return jwt.encode(
         {
             "usr": user_id,

@@ -18,3 +18,8 @@ class SignUpForm(Form):
     house_number = CharField(label="House Number", max_length=128, validators = [house_number_validator])
     zip_code = CharField(label="ZIP Code", max_length=128)  # no regex possible (to different around the world)
     town = CharField(label="Town", max_length=128, validators = [word_validator])
+
+
+class LogInForm(Form):
+    email = CharField(label="E-Mail", max_length=128, validators = [email_validator])
+    password = CharField(label="Password", max_length=128, min_length = 8)
