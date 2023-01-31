@@ -71,9 +71,27 @@
                     <label for="submit">
                         <button class="delete"></button>
                     </label>
-                    <input type="submit" name="submit" class="delete" style="display: none"> <!-- hidden does not work :( -->
+                    <input type="submit" name="submit" class="delete" style="display: none">
+                    <!-- hidden does not work :( -->
                 </form>
             </div>
         </article>
     {% endfor %}
+
+    <article class="media">
+        <div class="media-content">
+            {% if logged_in %}
+                <form action="/product/check_out/" method="POST">
+                    {% csrf_token %}
+                    <input type="text" name="cart" value="{{ cart_json }}" hidden>
+                    <input type="submit" class="button is-primary" value="Bestellen">
+                </form>
+            {% else %}
+                <div class="buttons">
+                    <a href="/user/signup/" class="button is-primary">Sign up</a>
+                    <a href="/user/login/" class="button is-primary">Log in</a>
+                </div>
+            {% endif %}
+        </div>
+    </article>
 </div>

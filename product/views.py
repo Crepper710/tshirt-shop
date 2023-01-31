@@ -2,10 +2,11 @@ import json
 import uuid
 
 from django.http import HttpRequest
-from django.shortcuts import Http404, HttpResponse
+from django.shortcuts import Http404, HttpResponse, redirect
 from django.template import loader
 
 import db
+import base64
 
 
 def list_(request: HttpRequest):
@@ -107,11 +108,7 @@ def info(request: HttpRequest):
                         WHERE artikel.artikelid = %(id)s""", {"id": id_number}
                     )
                     fits = cur.fetchall()
-                    print(colors)
-                    print(sizes)
-                    print(materials)
-                    print(motivs)
-                    print(fits)
+
                     empty_template = loader.get_template("empty_site.html")
                     template = loader.get_template("product/info.html")
                     return HttpResponse(
@@ -175,10 +172,6 @@ def shopping_cart(request: HttpRequest):
                     "motiv": motiv,
                     "fit": fit
                 }
-                print(
-                    f"id: {id_}, amount: {amount}, color: {color}, size: {size}, material: {material}, "
-                    f"motiv: {motiv}, fit: {fit}"
-                )
             except ValueError:
                 pass
 
@@ -243,12 +236,6 @@ def shopping_cart(request: HttpRequest):
             for entry in temp:
                 fits[entry[0]] = entry[1]
 
-            print(colors)
-            print(sizes)
-            print(materials)
-            print(motivs)
-            print(fits)
-
             for uuid_ in cart:
 
                 element = cart[uuid_]
@@ -285,16 +272,17 @@ def shopping_cart(request: HttpRequest):
 
                 cart_queried.append(element_queried)
 
-    print(cart)
-    print(cart_queried)
     empty_template = loader.get_template("empty_site.html")
     template = loader.get_template("product/shopping_cart.html")
+    cart_json = json.dumps(cart)
     response = HttpResponse(
         empty_template.render(
             {
                 "site": template.render(
                     {
-                        "cart": cart_queried
+                        "cart": cart_queried,
+                        "cart_json": base64.urlsafe_b64encode(cart_json.encode("ascii")).decode("ascii"),
+                        "logged_in": "token" in request.COOKIES
                     },
                     request
                 )
@@ -302,5 +290,11 @@ def shopping_cart(request: HttpRequest):
             request
         )
     )
-    response.set_cookie("shopping_cart", json.dumps(cart))
+    response.set_cookie("shopping_cart", cart_json)
+    return response
+
+
+def check_out(request: HttpRequest):
+    # TODO generate new order
+    response = redirect("/")
     return response
