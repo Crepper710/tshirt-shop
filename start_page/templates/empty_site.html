@@ -6,8 +6,6 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
-        {% load user_tags %}
-        {% print_stuff %}
         <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
                 <a class="navbar-item" href="/">
@@ -21,7 +19,6 @@
                     </a>
                 </div>
                 <div class="navbar-end">
-                    <div class="navbar-item">
 <!-- Jette: Beispiel für eine Search Bar in Bulma. kein Plan wie man die Einrückt oder die Farbe ändert, LG
                          <div class="field has-addons">
                             <div class="control">
@@ -34,15 +31,8 @@
                             </div>
                         </div>
 -->
-                        <div class="buttons">
-                            <a class="button" href="/user/signup">
-                                Sign up
-                            </a>
-                            <a class="button is-primary" href="/user/login">
-                                Log in
-                            </a>
-                        </div>
-                    </div>
+                    {% load user_tags %}
+                    {% session_buttons %}
                 </div>
             </div>
         </nav>

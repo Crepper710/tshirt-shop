@@ -81,7 +81,7 @@ def login(request: HttpRequest):
 
                         if password == password_:
                             token = token_util.gen_token(id_)
-                            response = redirect("")
+                            response = redirect("/")  # TODO
                             response.set_cookie("token", token)
                             return response
     empty_template = loader.get_template("empty_site.html")
