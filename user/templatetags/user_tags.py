@@ -25,9 +25,6 @@ class SessionButtonsNode(Node):
             </div>
         """
 
-        for i in context:
-            print(i)
-
         request = context.get("request")
         request: WSGIRequest
 

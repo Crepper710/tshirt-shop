@@ -8,6 +8,8 @@ from django.template import loader
 import db
 import base64
 
+import token_util
+
 
 def list_(request: HttpRequest):
     if request.method == "GET":
@@ -130,7 +132,6 @@ def info(request: HttpRequest):
                             request
                         )
                     )
-                    return HttpResponse("")
         except ValueError:
             raise Http404()
     raise Http404()
@@ -295,6 +296,117 @@ def shopping_cart(request: HttpRequest):
 
 
 def check_out(request: HttpRequest):
-    # TODO generate new order
     response = redirect("/")
+
+    if request.method == "POST" and "token" in request.COOKIES:
+        cart_b64 = request.POST.get("cart", "")
+        cart_json = base64.urlsafe_b64decode(cart_b64).decode("ascii")
+        cart = json.loads(cart_json)
+
+        user_id = token_util.get_user_from_token(request.COOKIES.get("token", ""))
+
+        if user_id is not None:
+            with db.open_connection() as con:
+                con: db.connection
+                with con.cursor() as cur:
+                    cur: db.cursor
+
+                    successfully_added = 0
+
+                    cur.execute("""
+                    INSERT INTO bestellung (kundenid) VALUES (%(user_id)s) RETURNING bestellid
+                    """, {
+                        "user_id": user_id
+                    })
+
+                    order_id = cur.fetchone()[0]
+
+                    for key in cart:
+                        entry = cart[key]
+
+                        id_ = entry.get("id", -1)
+                        color = entry.get("color", -1)
+                        size = entry.get("size", -1)
+                        material = entry.get("material", -1)
+                        motiv = entry.get("motiv", -1)
+                        fit = entry.get("fit", -1)
+                        amount = entry.get("amount", -1)
+
+                        values = {
+                            "order_id": order_id,
+                            "id": id_,
+                            "amount": amount,
+                            "color": None,
+                            "size": None,
+                            "material": None,
+                            "motiv": None,
+                            "fit": None
+                        }
+
+                        if id_ < 0 or amount < 0 or amount > 20:
+                            continue
+
+                        if color > 0:
+                            cur.execute("""
+                            SELECT COUNT(*) FROM artikelfarbe WHERE artikelid = %(id)s AND farbid = %(color)s
+                            """, {
+                                "id": id_,
+                                "color": color
+                            })
+                            if cur.fetchone()[0] > 0:
+                                values["color"] = color
+
+                        if size > 0:
+                            cur.execute("""
+                            SELECT COUNT(*) FROM artikelgroeße WHERE artikelid = %(id)s AND groeßenid = %(size)s
+                            """, {
+                                "id": id_,
+                                "size": size
+                            })
+                            if cur.fetchone()[0] > 0:
+                                values["size"] = size
+
+                        if material > 0:
+                            cur.execute("""
+                            SELECT COUNT(*) FROM artikelmaterial WHERE artikelid = %(id)s AND materialid = %(material)s
+                            """, {
+                                "id": id_,
+                                "material": material
+                            })
+                            if cur.fetchone()[0] > 0:
+                                values["material"] = material
+
+                        if motiv > 0:
+                            cur.execute("""
+                            SELECT COUNT(*) FROM artikelmotiv WHERE artikelid = %(id)s AND motivid = %(motiv)s
+                            """, {
+                                "id": id_,
+                                "motiv": motiv
+                            })
+                            if cur.fetchone()[0] > 0:
+                                values["motiv"] = motiv
+
+                        if fit > 0:
+                            cur.execute("""
+                            SELECT COUNT(*) FROM artikelpassform WHERE artikelid = %(id)s AND passformid = %(fit)s
+                            """, {
+                                "id": id_,
+                                "fit": fit
+                            })
+                            if cur.fetchone()[0] > 0:
+                                values["fit"] = fit
+
+                        cur.execute("""
+                        INSERT INTO bestellungartikel (bestellid, artikelid, passformid, groeßenid, motivid, farbid,
+                        materialid, anzahl)
+                        VALUES (%(order_id)s, %(id)s, %(fit)s, %(size)s, %(motiv)s, %(color)s, %(material)s, %(amount)s)
+                        """, values)
+
+                        successfully_added += 1
+
+                    if successfully_added <= 0:
+                        con.rollback()
+
+            response.delete_cookie("shopping_cart")
+
     return response

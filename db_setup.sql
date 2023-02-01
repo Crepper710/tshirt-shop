@@ -3,6 +3,7 @@ DROP TABLE IF EXISTS ArtikelGroeße;
 DROP TABLE IF EXISTS ArtikelFarbe;
 DROP TABLE IF EXISTS ArtikelMotiv;
 DROP TABLE IF EXISTS ArtikelMaterial;
+DROP TABLE IF EXISTS bestellungartikel;
 DROP TABLE IF EXISTS passform;
 DROP TABLE IF EXISTS motiv;
 DROP TABLE IF EXISTS farbe;
@@ -10,7 +11,6 @@ DROP TABLE IF EXISTS material;
 DROP TABLE IF EXISTS Groeße;
 DROP TABLE IF EXISTS lieferantartikel;
 DROP TABLE IF EXISTS lieferant;
-DROP TABLE IF EXISTS bestellungartikel;
 DROP TABLE IF EXISTS BenutzerBestellung;
 DROP TABLE IF EXISTS bestellung;
 DROP TABLE IF EXISTS benutzer;
@@ -176,29 +176,21 @@ VALUES (5, 'Tailored Fit');
 CREATE TABLE Bestellung (
 BestellID SERIAL PRIMARY KEY,
 KundenID INT,
-ArtikelID INT,
-PassformID INT,
-GroeßenID INT,
-MotivID INT,
-FarbID INT,
-MaterialID INT,
-Anzahl INT,
 
-FOREIGN KEY (KundenID) REFERENCES Benutzer(BenutzerID),
-FOREIGN KEY (ArtikelID) REFERENCES Artikel(ArtikelID)
+FOREIGN KEY (KundenID) REFERENCES Benutzer(BenutzerID)
 );
 
 
-INSERT INTO Bestellung (KundenID, ArtikelID, PassformID, GroeßenID, MotivID, FarbID, MaterialID, Anzahl)
-VALUES (1, 1, 1, 3, 6, 7, 5, 1);
-INSERT INTO Bestellung (KundenID, ArtikelID, PassformID, GroeßenID, MotivID, FarbID, MaterialID, Anzahl)
-VALUES (2, 2, NULL, 19, 7, 4, 2, 1);
-INSERT INTO Bestellung (KundenID, ArtikelID, PassformID, GroeßenID, MotivID, FarbID, MaterialID, Anzahl)
-VALUES (3, 3, NULL, 3, 8, 2, 2, 1);
-INSERT INTO Bestellung (KundenID, ArtikelID, PassformID, GroeßenID, MotivID, FarbID, MaterialID, Anzahl)
-VALUES (4, 4, NULL, NULL, 1, 6, 7, 1);
-INSERT INTO Bestellung (KundenID, ArtikelID, PassformID, GroeßenID, MotivID, FarbID, MaterialID, Anzahl)
-VALUES (5, 5, NULL, 4, 7, 8, 7, 1);
+INSERT INTO Bestellung (KundenID)
+VALUES (1);
+INSERT INTO Bestellung (KundenID)
+VALUES (2);
+INSERT INTO Bestellung (KundenID)
+VALUES (3);
+INSERT INTO Bestellung (KundenID)
+VALUES (4);
+INSERT INTO Bestellung (KundenID)
+VALUES (5);
 
 
 
@@ -701,20 +693,36 @@ INSERT INTO artikelMaterial (ArtikelID, MaterialID) VALUES (19,9);
 
 
 
-CREATE TABLE BestellungArtikel (
+CREATE TABLE bestellungartikel (
+ID SERIAL PRIMARY KEY,
 BestellID INT,
 ArtikelID INT,
+PassformID INT,
+GroeßenID INT,
+MotivID INT,
+FarbID INT,
+MaterialID INT,
+Anzahl INT,
 
-PRIMARY KEY (BestellID,ArtikelID),
 FOREIGN KEY (BestellID) REFERENCES Bestellung(BestellID),
-FOREIGN KEY (ArtikelID) REFERENCES Artikel(ArtikelID)
+FOREIGN KEY (ArtikelID) REFERENCES Artikel(ArtikelID),
+FOREIGN KEY (PassformID) REFERENCES Passform(PassformID),
+FOREIGN KEY (GroeßenID) REFERENCES groeße(GroeßenID),
+FOREIGN KEY (MotivID) REFERENCES motiv(MotivID),
+FOREIGN KEY (FarbID) REFERENCES farbe(FarbID),
+FOREIGN KEY (MaterialID) REFERENCES material(MaterialID)
 );
 
-INSERT INTO BestellungArtikel (BestellID, ArtikelID) VALUES (1,1);
-INSERT INTO BestellungArtikel (BestellID, ArtikelID) VALUES (2,2);
-INSERT INTO BestellungArtikel (BestellID, ArtikelID) VALUES (3,3);
-INSERT INTO BestellungArtikel (BestellID, ArtikelID) VALUES (4,4);
-INSERT INTO BestellungArtikel (BestellID, ArtikelID) VALUES (5,5);
+INSERT INTO BestellungArtikel (BestellID, ArtikelID, PassformID, GroeßenID, MotivID, FarbID, MaterialID, Anzahl)
+VALUES (1, 1, 1, 3, 6, 7, 5, 1);
+INSERT INTO BestellungArtikel (BestellID, ArtikelID, PassformID, GroeßenID, MotivID, FarbID, MaterialID, Anzahl)
+VALUES (2, 2, NULL, 19, 7, 4, 2, 1);
+INSERT INTO BestellungArtikel (BestellID, ArtikelID, PassformID, GroeßenID, MotivID, FarbID, MaterialID, Anzahl)
+VALUES (3, 3, NULL, 3, 8, 2, 2, 1);
+INSERT INTO BestellungArtikel (BestellID, ArtikelID, PassformID, GroeßenID, MotivID, FarbID, MaterialID, Anzahl)
+VALUES (4, 4, NULL, NULL, 6, 6, 7, 1);
+INSERT INTO BestellungArtikel (BestellID, ArtikelID, PassformID, GroeßenID, MotivID, FarbID, MaterialID, Anzahl)
+VALUES (5, 5, NULL, 4, 7, 8, 7, 1);
 
 
 
