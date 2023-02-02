@@ -96,7 +96,7 @@ BenutzerID SERIAL PRIMARY KEY,
 Vorname VARCHAR (255),
 Nachname VARCHAR (255),
 Strasse VARCHAR (255),
-PLZ INT,
+PLZ VARCHAR (255),
 Ort VARCHAR (255),
 Email VARCHAR (255),
 Passwort VARCHAR (255)
@@ -105,53 +105,53 @@ Passwort VARCHAR (255)
 
 
 INSERT INTO Benutzer (Vorname, Nachname, Strasse, PLZ, Ort, Email, Passwort)
-VALUES ('Lennert', 'Beasley', 'Hapertstraße 97', 34254, 'Neu Wilhelmsburg', 'Lennert.Beasley@mail.com', 'Passwort5342');
+VALUES ('Lennert', 'Beasley', 'Hapertstraße 97', '34254', 'Neu Wilhelmsburg', 'Lennert.Beasley@mail.com', 'Passwort5342');
 INSERT INTO Benutzer (Vorname, Nachname, Strasse, PLZ, Ort, Email, Passwort)
-VALUES ('Josh', 'Simons', 'Silberstraße 78', 67234, 'Frohenstadt', 'josh.simons@mail.com', 'Passwort2764');
+VALUES ('Josh', 'Simons', 'Silberstraße 78', '67234', 'Frohenstadt', 'josh.simons@mail.com', 'Passwort2764');
 INSERT INTO Benutzer (Vorname, Nachname, Strasse, PLZ, Ort, Email, Passwort) 
-VALUES ('Lukas', 'Müller', 'Silberstraße 78', 92834, 'Dortmund', 'lukas.müller@mail.com', 'Passwort9722');
+VALUES ('Lukas', 'Müller', 'Silberstraße 78', '92834', 'Dortmund', 'lukas.müller@mail.com', 'Passwort9722');
 INSERT INTO Benutzer (Vorname, Nachname, Strasse, PLZ, Ort, Email, Passwort)
-VALUES ('Simone', 'Wirtz', 'Lupferstraße 17', 67234, 'Kussstadt', 'Simone.Wirtz@mail.com', 'Passwort7788');
+VALUES ('Simone', 'Wirtz', 'Lupferstraße 17', '67234', 'Kussstadt', 'Simone.Wirtz@mail.com', 'Passwort7788');
 INSERT INTO Benutzer (Vorname, Nachname, Strasse, PLZ, Ort, Email, Passwort) 
-VALUES ('Sabrina', 'Keller', 'Baumallee 66', 22986, 'Rückenstadt', 'Sabrina.Keller@mail.com', 'Passwort4344');
+VALUES ('Sabrina', 'Keller', 'Baumallee 66', '22986', 'Rückenstadt', 'Sabrina.Keller@mail.com', 'Passwort4344');
 INSERT INTO Benutzer (Vorname, Nachname, Strasse, PLZ, Ort, Email, Passwort) 
-VALUES ('Mathias', 'Gülper', 'Pfostenwiese 78', 18764, 'Siebenstadt', 'Mathias.Gülper@mail.com', 'Passwort1287');
+VALUES ('Mathias', 'Gülper', 'Pfostenwiese 78', '18764', 'Siebenstadt', 'Mathias.Gülper@mail.com', 'Passwort1287');
 INSERT INTO Benutzer (Vorname, Nachname, Strasse, PLZ, Ort, Email, Passwort) 
-VALUES ('Joe', 'Brown', 'Siebenstraße 35', 81624, 'Portstadt', 'Joe.Brown@mail.com', 'Passwort9922');
+VALUES ('Joe', 'Brown', 'Siebenstraße 35', '81624', 'Portstadt', 'Joe.Brown@mail.com', 'Passwort9922');
 INSERT INTO Benutzer (Vorname, Nachname, Strasse, PLZ, Ort, Email, Passwort) 
-VALUES ('Jan', 'Johnson', 'Kaliumkamp 99', 98123, 'Elfenstadt', 'Jan.Johnson@mail.com', 'Passwort4499');
+VALUES ('Jan', 'Johnson', 'Kaliumkamp 99', '98123', 'Elfenstadt', 'Jan.Johnson@mail.com', 'Passwort4499');
 INSERT INTO Benutzer (Vorname, Nachname, Strasse, PLZ, Ort, Email, Passwort) 
-VALUES ('Leah', 'Sommer', 'Kreidestraße 19', 16734, 'Kieferstadt', 'Leah.Sommer@mail.com', 'Passwort3565');
+VALUES ('Leah', 'Sommer', 'Kreidestraße 19', '16734', 'Kieferstadt', 'Leah.Sommer@mail.com', 'Passwort3565');
 INSERT INTO Benutzer (Vorname, Nachname, Strasse, PLZ, Ort, Email, Passwort) 
-VALUES ('Sarah', 'Fass', 'Zellenallee 77', 01534, 'Krehenstadt', 'Sarah.Fass@mail.com', 'Passwort7794');
+VALUES ('Sarah', 'Fass', 'Zellenallee 77', '01534', 'Krehenstadt', 'Sarah.Fass@mail.com', 'Passwort7794');
 INSERT INTO Benutzer (Vorname, Nachname, Strasse, PLZ, Ort, Email, Passwort) 
-VALUES ('Tina', 'Meratti', 'Karottenstraße 27', 99018, 'Seltastadt', 'Tina.Meratti@mail.com', 'Passwort5682');
+VALUES ('Tina', 'Meratti', 'Karottenstraße 27', '99018', 'Seltastadt', 'Tina.Meratti@mail.com', 'Passwort5682');
 INSERT INTO Benutzer (Vorname, Nachname, Strasse, PLZ, Ort, Email, Passwort) 
-VALUES ('Bella', 'Caruso', 'Welpenkamp 53', 67236, 'Bengalstadt', 'Bella.Caruso@mail.com', 'Passwort8827');
+VALUES ('Bella', 'Caruso', 'Welpenkamp 53', '67236', 'Bengalstadt', 'Bella.Caruso@mail.com', 'Passwort8827');
 INSERT INTO Benutzer (Vorname, Nachname, Strasse, PLZ, Ort, Email, Passwort) 
-VALUES ('Thilo', 'Zapper', 'Raupenstraße 76', 77314, 'Pokerstadt', 'Thilo.Zapper@mail.com', 'Passwort7171');
+VALUES ('Thilo', 'Zapper', 'Raupenstraße 76', '77314', 'Pokerstadt', 'Thilo.Zapper@mail.com', 'Passwort7171');
 INSERT INTO Benutzer (Vorname, Nachname, Strasse, PLZ, Ort, Email, Passwort) 
-VALUES ('Axel', 'Schweiß', 'Ritterallee 91', 42665, 'Pendelstadt', 'Axel.Schweiß@mail.com', 'Passwort1717');
+VALUES ('Axel', 'Schweiß', 'Ritterallee 91', '42665', 'Pendelstadt', 'Axel.Schweiß@mail.com', 'Passwort1717');
 INSERT INTO Benutzer (Vorname, Nachname, Strasse, PLZ, Ort, Email, Passwort) 
-VALUES ('Hans', 'Olo', 'Milleniumstraße 54', 24778, 'Wortstadt', 'Hans.Olo@mail.com', 'Passwort1122');
+VALUES ('Hans', 'Olo', 'Milleniumstraße 54', '24778', 'Wortstadt', 'Hans.Olo@mail.com', 'Passwort1122');
 INSERT INTO Benutzer (Vorname, Nachname, Strasse, PLZ, Ort, Email, Passwort)
-VALUES ('Lars', 'Krismes', 'Whamstraße 67', 87453, 'Waschstadt', 'Lars.Krismes@mail.com', 'Passwort2343');
+VALUES ('Lars', 'Krismes', 'Whamstraße 67', '87453', 'Waschstadt', 'Lars.Krismes@mail.com', 'Passwort2343');
 INSERT INTO Benutzer (Vorname, Nachname, Strasse, PLZ, Ort, Email, Passwort)
-VALUES ('Claire', 'Werk', 'Hammerstraße 87', 63451, 'Cosmostadt', 'Claire.Werk@mail.com', 'Passwort9098');
+VALUES ('Claire', 'Werk', 'Hammerstraße 87', '63451', 'Cosmostadt', 'Claire.Werk@mail.com', 'Passwort9098');
 INSERT INTO Benutzer (Vorname, Nachname, Strasse, PLZ, Ort, Email, Passwort)
-VALUES ('Ken', 'Guru', 'Australienstraße 12', 65535, 'Monitorstadt', 'Ken.Guru@mail.com', 'Passwort7654');
+VALUES ('Ken', 'Guru', 'Australienstraße 12', '65535', 'Monitorstadt', 'Ken.Guru@mail.com', 'Passwort7654');
 INSERT INTO Benutzer (Vorname, Nachname, Strasse, PLZ, Ort, Email, Passwort)
-VALUES ('Anne', 'Theke', 'Barstraße 64', 42425, 'Millenstadt', 'Anne.Theke@mail.com', 'Passwort2352');
+VALUES ('Anne', 'Theke', 'Barstraße 64', '42425', 'Millenstadt', 'Anne.Theke@mail.com', 'Passwort2352');
 INSERT INTO Benutzer (Vorname, Nachname, Strasse, PLZ, Ort, Email, Passwort)
-VALUES ('Ali', 'Mente', 'Quallenstraße 73', 88756, 'Computerstadt', 'Ali.Mente@mail.com', 'Passwort4567');
+VALUES ('Ali', 'Mente', 'Quallenstraße 73', '88756', 'Computerstadt', 'Ali.Mente@mail.com', 'Passwort4567');
 INSERT INTO Benutzer (Vorname, Nachname, Strasse, PLZ, Ort, Email, Passwort)
-VALUES ('Maike', 'Fer', 'Klumpenstraße 43', 11743, 'Ballstadt', 'Maike.Fer@mail.com', 'Passwort4445');
+VALUES ('Maike', 'Fer', 'Klumpenstraße 43', '11743', 'Ballstadt', 'Maike.Fer@mail.com', 'Passwort4445');
 INSERT INTO Benutzer (Vorname, Nachname, Strasse, PLZ, Ort, Email, Passwort)
-VALUES ('Ella', 'Stisch', 'Tupperstraße 54', 88357, 'Jakobsstadt', 'Ella.Stisch@mail.com', 'Passwort8245');
+VALUES ('Ella', 'Stisch', 'Tupperstraße 54', '88357', 'Jakobsstadt', 'Ella.Stisch@mail.com', 'Passwort8245');
 INSERT INTO Benutzer (Vorname, Nachname, Strasse, PLZ, Ort, Email, Passwort)
-VALUES ('Donna', 'Wetter', 'Gunterstraße 82', 91233, 'Gelddorf', 'Donna.Wetter@mail.com', 'Passwort6273');
+VALUES ('Donna', 'Wetter', 'Gunterstraße 82', '91233', 'Gelddorf', 'Donna.Wetter@mail.com', 'Passwort6273');
 INSERT INTO Benutzer (Vorname, Nachname, Strasse, PLZ, Ort, Email, Passwort)
-VALUES ('Phil', 'Stift', 'Ersatzstraße 90', 74536, 'Helmstadt', 'Phil.Stift@mail.com', 'Passwort8437');
+VALUES ('Phil', 'Stift', 'Ersatzstraße 90', '74536', 'Helmstadt', 'Phil.Stift@mail.com', 'Passwort8437');
 
 
 

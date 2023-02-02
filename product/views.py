@@ -5,6 +5,8 @@ from django.http import HttpRequest
 from django.shortcuts import Http404, HttpResponse, redirect
 from django.template import loader
 
+from psycopg2.errors import SyntaxError
+
 import db
 import base64
 
@@ -13,10 +15,9 @@ import token_util
 
 def list_(request: HttpRequest):
     if request.method == "GET":
-        search = request.GET.get("q", "pa")
-        sort = request.GET.get("s", "")
+        search = request.GET.get("q", "")
+        sort = request.GET.get("s", "pa")
         page = request.GET.get("p", "1")
-        sort_query = ""
         if sort == "pd":
             sort_query = "ORDER BY preis DESC"
         else:
@@ -26,17 +27,47 @@ def list_(request: HttpRequest):
             page = int(page)
         except ValueError:
             page = 1
-        article = []
+        articles = []
         with db.open_connection() as con:
             con: db.connection
             with con.cursor() as cur:
                 cur: db.cursor
-                cur.execute(
-                    f"SELECT artikel.artikelid, artikel.artikelbezeichnung, artikel.artikelbeschreibung, "
-                    f"artikel.preis FROM artikel {sort_query} LIMIT 11 OFFSET %(page)s;",
-                    {"page": (page - 1) * 10, "sort": sort}
-                )
-                articles = cur.fetchall()
+                try:
+                    cur.execute(
+                        f"""
+                        SELECT artikel.artikelid, artikel.artikelbezeichnung, artikel.artikelbeschreibung, artikel.preis
+                        FROM artikel WHERE to_tsvector(artikelbeschreibung) @@ to_tsquery('german', %(query)s) or %(query)s = ''
+                        {sort_query} LIMIT 11 OFFSET %(page)s;""", {
+                            "page": (page - 1) * 10,
+                            "query": search
+                        }
+                    )
+                    articles = cur.fetchall()
+                except SyntaxError as e:
+                    pass
+
+                for i in range(len(articles)):
+                    article = articles[i]
+
+                    cur.execute("""
+                    SELECT farbbezeichnung FROM artikelfarbe INNER JOIN farbe ON artikelfarbe.farbid = farbe.farbid
+                    WHERE artikelid = %(id)s LIMIT 1
+                    """, {
+                        "id": article[0]
+                    })
+                    color = cur.fetchone()[0]
+
+                    cur.execute("""
+                    SELECT motivbezeichnung FROM artikelmotiv INNER JOIN motiv ON artikelmotiv.motivid = motiv.motivid
+                    WHERE artikelid = %(id)s LIMIT 1
+                    """, {
+                        "id": article[0]
+                    })
+                    motiv = cur.fetchone()[0]
+
+                    article += (f"/static/product/{article[1]}/{motiv}/{color}.png", )
+
+                    articles[i] = article
 
         empty_template = loader.get_template("empty_site.html")
         template = loader.get_template("product/list.html")
@@ -270,6 +301,8 @@ def shopping_cart(request: HttpRequest):
                     element_queried["motiv"] = motivs[motiv]
                 if type(fit) == int and fit in fits:
                     element_queried["fit"] = fits[fit]
+
+                element_queried["image_path"] = f"/static/product/{info_[1]}/{element_queried['motiv']}/{element_queried['color'][0]}.png"
 
                 cart_queried.append(element_queried)
 

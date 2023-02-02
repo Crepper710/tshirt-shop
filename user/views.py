@@ -49,7 +49,7 @@ def signup(request: HttpRequest):
 
                     cur.execute("SELECT benutzerid FROM benutzer WHERE email = %(email)s", {"email": email})
 
-                    id_ = cur.fetchone()
+                    id_ = cur.fetchone()[0]
                     token = token_util.gen_token(id_)
 
                     response = redirect("/")  # TODO

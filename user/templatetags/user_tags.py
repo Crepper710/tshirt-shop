@@ -34,6 +34,9 @@ class SessionButtonsNode(Node):
             return not_logged_in_buttons
 
         user_id = token_util.get_user_from_token(token)
+
+        print(type(user_id), user_id)
+
         if user_id is None:
             return not_logged_in_buttons
 
@@ -43,7 +46,7 @@ class SessionButtonsNode(Node):
 
                 cur.execute(
                     """
-                        SELECT vorname FROM benutzer WHERE benutzerid = %(id)s
+                    SELECT vorname FROM benutzer WHERE benutzerid = %(id)s
                     """, {
                         "id": user_id
                     }

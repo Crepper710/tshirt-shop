@@ -29,8 +29,8 @@
         <a href="/product/info/?id={{ article.0 }}">
             <article class="media">
                 <figure class="media-left">
-                    <p class="image is-128x128">
-                        <img src="TODO" alt="TODO">
+                    <p class="image is-128x128 is-1by1">
+                        <img src="{{ article.4 }}" alt="TODO">
                     </p>
                 </figure>
                 <div class="media-content">
@@ -58,7 +58,7 @@
         <div class="column is-one-third">
             {% if has_prev %}
                 <div class="buttons">
-                    <a href="/product/list/?q={{ search }}&s={{ sort }}&p={{ prev_page }}"
+                    <a href="?q={{ search }}&s={{ sort }}&p={{ prev_page }}"
                        class="button is-primary is-full">
                         &lt;
                     </a>
@@ -69,7 +69,7 @@
         <div class="column is-one-third">
             {% if has_next %}
                 <div class="buttons is-right">
-                    <a href="/product/list/?q={{ search }}&s={{ sort }}&p={{ next_page }}"
+                    <a href="?q={{ search }}&s={{ sort }}&p={{ next_page }}"
                        class="button is-primary is-full">
                         &gt;
                     </a>
